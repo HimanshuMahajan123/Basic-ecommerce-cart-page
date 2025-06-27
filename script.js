@@ -45,17 +45,27 @@ document.addEventListener('DOMContentLoaded' , () => {
 
             emptyCartMessage.classList.add("hidden")
             cartTotalMessage.classList.remove("hidden")
-            cart.forEach(item => {
+            cart.forEach((item,index) => {
                 totalPrice += item.price
                 const cartItem = document.createElement('div');
                 cartItem.innerHTML = `
                 ${item.name} - $${item.price.toFixed(2)}
                 `
                 cartItems.appendChild(cartItem);
+                TotalPriceDisplay.textContent = `${totalPrice.toFixed(2)}`;
             })
         }
         else{
             emptyCartMessage.classList.remove('hidden');
+            TotalPriceDisplay.textContent = `0.00`;
         }
     }
+
+    checkoutBtn.addEventListener('click' , () => {
+        cart.length = 0;
+        alert("checkout successful");
+        renderCart();
+    })
+
+
 })
