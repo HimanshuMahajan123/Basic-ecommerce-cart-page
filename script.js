@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded' , () => {
     const productList = document.getElementById("product-list");
     const cartItems = document.getElementById("cart-items");
     const emptyCartMessage = document.getElementById("empty-cart");
-    const cartTotalMessage = document.getElementsByClassName("cart-total");
-    const TotalPriceDisplay = document.getElementsByClassName("total-price");
+    const cartTotalMessage = document.getElementById("cart-total");
+    const TotalPriceDisplay = document.getElementById("total-price");
     const checkoutBtn = document.getElementById("checkout-btn");
 
     products.forEach(product => {
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded' , () => {
     productList.addEventListener('click' , (e) => {
         if(e.target.tagName === "BUTTON"){
             const productId = parseInt(e.target.getAttribute("data-id"));
-            const product = products.find(p => p.id === productId);
+            const product = products.find((p) => p.id === productId);
             addToCart(product);
         }
     })
@@ -36,15 +36,17 @@ document.addEventListener('DOMContentLoaded' , () => {
 
     function addToCart(product){
         cart.push(product);
+        renderCart();
     }
 
     function renderCart(){
-        cartItems.innerText =""; //you can also add a class hidden so that empty cart message doesn't pops out 
+        cartItems.innerText = ""; //you can also add a class hidden so that empty cart message doesn't pops out 
         let totalPrice = 0;
-        if(cart.length > 0){
 
+        if(cart.length > 0){
             emptyCartMessage.classList.add("hidden")
             cartTotalMessage.classList.remove("hidden")
+
             cart.forEach((item,index) => {
                 totalPrice += item.price
                 const cartItem = document.createElement('div');
